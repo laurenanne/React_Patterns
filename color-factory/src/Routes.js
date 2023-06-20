@@ -20,6 +20,18 @@ function Routes() {
     setColors((colors) => [newColor, ...colors]);
   };
 
+  function render(props) {
+    const foundColor = colors.some(
+      (item) => item.colorName === props.match.params.color
+    );
+    console.log(foundColor);
+    if (!foundColor) {
+      return <Redirect to="/colors" />;
+    } else {
+      return <Color colors={colors} />;
+    }
+  }
+
   return (
     <Switch>
       <Route exact path="/colors">
@@ -28,13 +40,7 @@ function Routes() {
       <Route path="/colors/new">
         <ColorForm addColor={addColor} history={history} />
       </Route>
-      <Route path="/colors/:color">
-        {foundColor ? (
-          <Color colors={colors} history={history} />
-        ) : (
-          <Redirect to="/colors" />
-        )}
-      </Route>
+      <Route exact path="/colors/:color" render={render}></Route>
       <Redirect to="/colors" />
     </Switch>
   );

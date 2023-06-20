@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+// import { useHistory } from "react-router-dom";
 
-const ColorForm = ({ addColor }) => {
-  const history = useHistory();
+const ColorForm = ({ addColor, history }) => {
+  // const history = useHistory();
 
   const initialState = {
     colorName: "",
